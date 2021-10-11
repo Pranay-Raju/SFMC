@@ -1,0 +1,25 @@
+Task: Print the Recent product names (Recent product should be on the top) purchased by a Subscriber.  
+
+ 
+
+%%[ 
+var @row, @rowCount, @LookupValue 
+set @LookupValue = AttributeValue("_subscriberkey") 
+set @LookupValue = "123" 
+set @rows=LookupRows("Products","subscriberkey",@LookupValue) 
+set @rowCount = rowcount(@rows) 
+
+if @rowCount > 0 then 
+ 
+for @i = 1 to @rowCount do 
+ 
+var @row, @PurchaseDate, @Product,  
+set @row = row(@rows, @i) 
+set @Product= field(@row,"Product") 
+set @PurchaseDate = field(@row,"PurchaseDate") 
+ 
+next @i ]%% 
+
+%%[ endif ]%% 
+
+<br>Product: %%=v(@Product)=%%, PurchaseDate: %%=v(@PurchaseDate)=%% 
