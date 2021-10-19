@@ -1,0 +1,24 @@
+%%[
+
+
+
+var @fullstring
+var @firstsubstring
+var @lastsubstring
+var @Reverseorder
+set @fullstring = AttributeValue("fullName") /* value from attribute or DE column in send context */
+set @fullstring = "salesforce,google" /* or a literal value */
+
+
+
+if indexOf(@fullName, " ,") > 0 then
+set @firstsubstring = Substring(@fullName,1, Subtract(IndexOf(@fullName,", "),1))
+set @lastName = Substring(@fullName,Add(indexOf(@fullName, " ,"),1))
+set @Reverseorder=concat(@lastsubstring,",",@firstsubstring)
+endif
+
+
+
+]%%
+fullstring: %%=v(@fullstring)=%%
+<br>Reverseorder: %%=v(@Reverseorder)=%%
